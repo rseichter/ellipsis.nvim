@@ -24,16 +24,28 @@ modify complete lines.
 
 ## Installation
 
+### Lazy plugin manager
+
 When using [lazy.nvim](https://lazy.folke.io/), the following snippet suffices:
 
 ```lua
 {
-  'https://gitea.horus-it.com/rseichter/ellipsis.nvim.git',
+  'rseichter/ellipsis.nvim',
   opts = { bindto = '<leader>ell' },
 }
 ```
 
-There is no default value for `bindto`.
+There is no default value for `bindto`. The bound LUA function is
+`Ellipsis.convert()`.
+
+### Manual installation
+
+The procedure for manual plugin installation is described in the Neovim
+documentation. Use the command `:help packages` to access it.
+
+## Usage
+
+Select lines in Neovim visual mode, then use your defined key binding.
 
 ## License
 
