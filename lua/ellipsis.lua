@@ -1,4 +1,4 @@
---[[ Copyright © 2024 Ralph Seichter.
+--[[ Copyright © 2024,2026 Ralph Seichter.
 
 This file is part of ellipsis.nvim.
 
@@ -18,18 +18,18 @@ local M = {}
 
 M.setup = function(opts)
   _G.Ellipsis = M
-  if opts and opts.bindto and type(opts.bindto) == 'string' then
-    vim.keymap.set('v', opts.bindto, function()
+  if opts and opts.bindto and type(opts.bindto) == "string" then
+    vim.keymap.set("v", opts.bindto, function()
       _G.Ellipsis.convert()
     end, {
-      desc = 'Convert gaps in text into horizontal ellipsis',
+      desc = "Convert gaps in text into horizontal ellipsis",
     })
   end
 end
 
 M.convert = function()
-  local buffer, from_row, _ = unpack(vim.fn.getpos('v'))
-  local _, to_row, _ = unpack(vim.fn.getpos('.'))
+  local buffer, from_row, _ = unpack(vim.fn.getpos("v"))
+  local _, to_row, _ = unpack(vim.fn.getpos("."))
   if to_row < from_row then
     -- Ensure proper ordering. User may have selected
     -- the visual block "upwards".
@@ -41,14 +41,14 @@ M.convert = function()
   local replacement = {}
   for _, line in ipairs(lines) do
     -- Example: "Johnny<space*3>Bravo" matches, but "Johnny<space>Bravo" does not.
-    local r = string.gsub(line, '(%S+)%s(%s+)%s(%S+)', function(prefix, gap, suffix)
-      return prefix .. ' ' .. string.rep('…', #gap) .. ' ' .. suffix
+    local r = string.gsub(line, "(%S+)%s(%s+)%s(%S+)", function(prefix, gap, suffix)
+      return prefix .. " " .. string.rep("…", #gap) .. " " .. suffix
     end)
     table.insert(replacement, r)
   end
   vim.api.nvim_buf_set_lines(buffer, from_row, to_row, false, replacement)
   -- Exit visual mode
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<esc>', true, false, true), 'x', false)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>", true, false, true), "x", false)
 end
 
 return M

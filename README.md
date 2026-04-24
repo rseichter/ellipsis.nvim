@@ -24,32 +24,38 @@ modify complete lines.
 
 ## Installation
 
-### Lazy plugin manager
+### Via package managers
+
+Neovim 0.12 introduced the [vim.pack](https://neovim.io/doc/user/pack/)
+integrated package manager. Here is a matching configuration snippet:
+
+```lua
+vim.pack.add({ "https://github.com/rseichter/ellipsis.nvim", })
+vim.keymap.set("v", "<leader>e", function() require("ellipsis").convert() end)
+```
 
 When using [lazy.nvim](https://lazy.folke.io/), the following snippet suffices:
 
 ```lua
-{
-  'rseichter/ellipsis.nvim',
-  opts = { bindto = '<leader>ell' },
-}
+{ "rseichter/ellipsis.nvim", opts = { bindto = "<leader>e" }, }
 ```
 
-There is no default value for `bindto`. The bound LUA function is
-`Ellipsis.convert()`.
+Defining a custom key binding is convenient, but optional.
 
-### Manual installation
+### Via manual installation
 
 The procedure for manual plugin installation is described in the Neovim
 documentation. Use the command `:help packages` to access it.
 
 ## Usage
 
-Select lines in Neovim visual mode, then use your defined key binding.
+Select lines in Neovim visual mode, then use either your custom key binding or
+the command `:lua Ellipsis.convert()` to process the lines currently selected
+in visual mode. There is no default keymap binding.
 
 ## License
 
-Copyright © 2024 Ralph Seichter.
+Copyright © 2024,2026 Ralph Seichter.
 
 ellipsis.nvim is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
