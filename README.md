@@ -24,7 +24,7 @@ modify complete lines.
 
 ## Installation
 
-### Via package managers
+### With package managers
 
 Neovim 0.12 introduced the [vim.pack](https://neovim.io/doc/user/pack/)
 integrated package manager. Here is a matching configuration snippet:
@@ -42,7 +42,7 @@ When using [lazy.nvim](https://lazy.folke.io/), the following snippet suffices:
 
 Defining a custom key binding is convenient, but optional.
 
-### Via manual installation
+### Manually
 
 The procedure for manual plugin installation is described in the Neovim
 documentation. Use the command `:help packages` to access it.
